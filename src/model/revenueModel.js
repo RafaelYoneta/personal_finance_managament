@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
     revenueDate:Date,
     createdAt:Date,
     removedAt:Date,
+    updatedAt:Date,
 })
 
 const Model = mongoose.model('revenues',schema)
