@@ -13,14 +13,18 @@ async function registerRevenue(req,res){
         description,
         value,
         revenueDate,
+        userId,
     } = req.body
 
     const newRevenue = new revenueModel({
         description,
         value,
         revenueDate,
+        userId,
+        status:"Active",
         createdAt: new Date(),
         updatedAt: null,
+        removedAt:null,
     })
 
     const saveRevenue = await newRevenue.save()
@@ -37,16 +41,30 @@ async function updateRevenue(req,res){
         revenueDate: req.body.revenueDate,
         updatedAt: new Date(),
     })
-    
+
     const updatedRevenue = await revenueModel.findOneAndUpdate({_id:req.body.id},updateRevenue,{new:true})
     
     res.status(200).send(updatedRevenue)
 }
 
+async function deleteRevenue(req,res){
+   
+    const deleteRevenue = revenueModel({
+        _id: req.body.id,
+        status: "Removed",
+        updatedAt: new Date(),
+        removedAt:new Date(),
+    })
+
+    const deletedRevenue = await revenueModel.findOneAndUpdate({_id:req.body.id},deleteRevenue,{new:true})
+    
+    res.status(200).send(deletedRevenue)
+}
 
 
 module.exports = {
     listRevenue,
     registerRevenue,
     updateRevenue,
+    deleteRevenue,
 }
