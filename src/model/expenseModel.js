@@ -5,6 +5,11 @@ const schema = new mongoose.Schema({
     category:String,
     value:Number,
     expenseDate: Date,
+    status:String,
+    userId:mongoose.ObjectId,
+    createdAt:Date,
+    removedAt:Date,
+    updatedAt:Date,
     
 })
 
