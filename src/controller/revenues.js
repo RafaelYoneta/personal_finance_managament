@@ -1,10 +1,14 @@
 const revenueModel = require('../model/revenueModel')
 
 async function listRevenue(req,res){
+
+    console.log(req)
     const {id} = req.body
     const obj = id ? {_id:id} : null
     const userRevenue = await revenueModel.find(obj)
     res.send(userRevenue)
+
+
 
 };
 
